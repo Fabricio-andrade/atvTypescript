@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import { CreateUserController } from './controllers/user/createUserController';
 import { AuthUserController } from './controllers/user/authUserController';
+import { isAuthenticated } from './middleware/isAuthenticated';
+import { CreateCardController } from './controllers/card/createCardController';
+import { VerifyCardController } from './controllers/card/verifyCardController';
 
 //const router = Router();
 
@@ -9,9 +12,10 @@ const router = Router();
 
 router.post('/user', new CreateUserController().handle);
 router.post('/auth', new AuthUserController().handle);
-//router.get('/userinfo', isAuthenticated, new DetailUserController().handle);
+router.post('/card', isAuthenticated, new CreateCardController().handle);
+router.post('/verify', isAuthenticated, new VerifyCardController().handle);
 
 export {router};
 
 
-//token Fabraz: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRmFicmljaW8iLCJ1c3VhcmlvIjoiZmFicmF6IiwiaWF0IjoxNzEzODI4NzIyLCJleHAiOjE3MTY0MjA3MjIsInN1YiI6ImNhNThhNmI0LTQ0YjQtNDQ0Yy1hMjNhLWRmNmVlNDFlODczOCJ9.VoWWQ4S04tCThb8TMkJPjWeuljO-GCvMtyMb4paB-JA
+//token Fabraz: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmFpciIsInVzdWFyaW8iOiJKTWVzc2lhcyIsImlhdCI6MTcxNDA2ODM4NSwiZXhwIjoxNzE2NjYwMzg1LCJzdWIiOiI2ZjFjY2JkMi0yOGM0LTQxYTAtOTFhMy1mNWI0NWFmMTY0MzIifQ.9MBE7P-JzpEYgMUGGRRf_0U4yy0admXY9KwoO4tFDug

@@ -16,6 +16,18 @@ class CreateCardService {
             throw new Error("Não enviou numero do cartão!");
         }
 
+        if (!nameUser) {
+            throw new Error("Não enviou um nome!");
+        }
+
+        if (!validade) {
+            throw new Error("Não informou a validade!");
+        }
+
+        if (!digSeg) {
+            throw new Error("Não informou digitos de segurança!");
+        }
+
         const cardExists = await prismaClient.card.findFirst({
             where:{
                 number:number
@@ -38,9 +50,10 @@ class CreateCardService {
                 idUser: user
             },
             select: {
-                number:true,
-                nameUser:true,
-                validade:true,
+                number: true,
+                nameUser: true,
+                validade: true,
+                idUser: true
 
             }
         })
